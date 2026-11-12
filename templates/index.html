@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Performance Prediction</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 25px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #19558c;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 28px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #19558c;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #19558c;
+            color: white;
+            border: none;
+            border-radius: 7px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #123f6a;
+        }
+
+        .result {
+            margin-top: 22px;
+            padding: 18px;
+            background: #e8f5e9;
+            border-left: 5px solid #2e7d32;
+            border-radius: 7px;
+            text-align: center;
+        }
+
+        .result h2 {
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+
+        .result p {
+            font-size: 25px;
+            font-weight: bold;
+            color: #1b5e20;
+        }
+
+        .error {
+            margin-top: 20px;
+            padding: 15px;
+            background: #ffebee;
+            border-left: 5px solid #c62828;
+            border-radius: 7px;
+            color: #b71c1c;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            color: #888;
+            font-size: 12px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 22px;
+            }
+
+            h1 {
+                font-size: 23px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Student Performance Prediction</h1>
+
+        <p class="subtitle">
+            Enter the student's details to predict the Performance Index
+            using Machine Learning.
+        </p>
+
+        <form method="POST" action="/">
+
+            <div class="form-group">
+                <label for="hours_studied">Hours Studied</label>
+                <input
+                    type="number"
+                    id="hours_studied"
+                    name="hours_studied"
+                    min="0"
+                    max="24"
+                    step="any"
+                    placeholder="Enter hours studied"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="previous_scores">Previous Scores</label>
+                <input
+                    type="number"
+                    id="previous_scores"
+                    name="previous_scores"
+                    min="0"
+                    max="100"
+                    step="any"
+                    placeholder="Enter previous scores"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="extracurricular">Extracurricular Activities</label>
+                <select id="extracurricular" name="extracurricular" required>
+                    <option value="">Select an option</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="sleep_hours">Sleep Hours</label>
+                <input
+                    type="number"
+                    id="sleep_hours"
+                    name="sleep_hours"
+                    min="0"
+                    max="24"
+                    step="any"
+                    placeholder="Enter sleep hours"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="papers">Sample Question Papers Practiced</label>
+                <input
+                    type="number"
+                    id="papers"
+                    name="papers"
+                    min="0"
+                    max="100"
+                    step="any"
+                    placeholder="Enter number of papers practiced"
+                    required
+                >
+            </div>
+
+            <button type="submit">Predict Performance</button>
+
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                <h2>Prediction Result</h2>
+                <p>{{ prediction }}</p>
+                <span>Predicted Performance Index</span>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <strong>Error:</strong> {{ error }}
+            </div>
+        {% endif %}
+
+        <div class="footer">
+            Student Performance Prediction | Machine Learning Project
+        </div>
+
+    </div>
+
+</body>
+</html>
